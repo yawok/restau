@@ -23,3 +23,6 @@
 hs_err_pid*
 replay_pid*
 /Restau/nbproject/private/
+*.properties
+../.DS_Store
+.DS_Store
