@@ -10,35 +10,30 @@ import java.util.ArrayList;
  */
 public class Order {
     
-    protected boolean cooked;
-    protected boolean served;
-    protected boolean paid;
-    protected char customer;
+    protected boolean isServed;
+    protected boolean isPaid;
+    protected Customer customer;
     
-    public Order(boolean cooked,boolean served , boolean paid, char customer){
-        this.cooked=cooked;
-        this.served=served;
-        this.paid=paid;
+    public Order(boolean cooked,boolean isServed , boolean isPaid, Customer customer){
+        this.isServed=isServed;
+        this.isPaid=isPaid;
         this.customer=customer;
     }
     
-    ArrayList<Menu> item = new ArrayList<Menu>();
+    ArrayList<MenuItems> item = new ArrayList<MenuItems>();
     
     
     //Get methods
-    public boolean getCooked(){
-        return cooked;
-    }
     
     public boolean getServed(){
-        return served;
+        return isServed;
     }
     
     public boolean getPaid(){
-        return paid;
+        return isPaid;
     }
     
-    public char getCustomer(){
+    public Customer getCustomer(){
         return customer;
     }
     
@@ -48,22 +43,18 @@ public class Order {
     
     
     // Set methods
-    public boolean setCooked(boolean newCooked){
-        this.cooked=newCooked;
-        return newCooked;
+    
+    public boolean setServed(boolean newisServed){
+        this.isServed=newisServed;
+        return newisServed;
     }
     
-    public boolean setServed(boolean newServed){
-        this.served=newServed;
-        return newServed;
+    public boolean setPaid(boolean newisPaid){
+        this.isPaid=newisPaid;
+        return newisPaid;
     }
     
-    public boolean setPaid(boolean newPaid){
-        this.paid=newPaid;
-        return newPaid;
-    }
-    
-    public char setCustomer(char newCustomer){
+    public Customer setCustomer(Customer newCustomer){
         this.customer=newCustomer;
         return newCustomer;
     }
