@@ -24,6 +24,9 @@ public class Drink extends MenuItem {
         this.drinkType = drinkType;
     }
     
-    
+    @Override 
+    public String toString() {
+        return this.getTitle();
+    }
     
 }

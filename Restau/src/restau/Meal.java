@@ -25,5 +25,9 @@ public class Meal extends MenuItem {
         this.mealType = mealType;
     }
     
+    @Override 
+    public String toString() {
+        return this.getTitle();
+    }
     
 }

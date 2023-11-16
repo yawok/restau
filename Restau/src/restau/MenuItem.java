@@ -11,7 +11,7 @@ package restau;
 public abstract class MenuItem {
     private String title;
     private Integer price;
-    private boolean isPrepared;
+    private boolean prepared;
 
     public MenuItem(String title, Integer price) {
         this.title = title;
@@ -34,12 +34,12 @@ public abstract class MenuItem {
         this.price = price;
     }
 
-    public boolean isIsPrepared() {
-        return isPrepared;
+    public boolean isPrepared() {
+        return prepared;
     }
 
-    public void setIsPrepared(boolean isPrepared) {
-        this.isPrepared = isPrepared;
+    public void setIsPrepared() {
+        this.prepared = true;
     }
 
     @Override

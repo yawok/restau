@@ -9,6 +9,8 @@ package restau;
  * @author yawobeng
  */
 public interface IsManager {
-    public void collectCash(Barman barman);
+    public void collectCash(Staff staff);
+    
     public void throwOut(Character character);
+    // throwOut will collect all their cash and set their table to null or something
 }

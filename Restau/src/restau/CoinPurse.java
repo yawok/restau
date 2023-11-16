@@ -9,7 +9,7 @@ package restau;
  * @author yawobeng
  */
 public final class CoinPurse {
-    private Integer balance;
+    private float balance;
 
     public CoinPurse() {}
     
@@ -17,11 +17,11 @@ public final class CoinPurse {
         this.balance = balance;
     }
 
-    public Integer getBalance() {
+    public float getBalance() {
         return balance;
     }
 
-    public void setBalance(Integer balance) {
+    public void setBalance(float balance) {
         this.balance = balance;
     }
        

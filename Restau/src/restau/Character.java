@@ -13,15 +13,16 @@ import java.util.List;
 public abstract class Character {
     private String firstName;
     private String lastName;
-    private CoinPurse coinPurse;
     private Sex sex;
-    private List<Order> orders;
+    private boolean trownOut;
+    
+    private CoinPurse coinPurse = new CoinPurse();
 
-    public Character(String firstName, String lastName, CoinPurse coinPurse, Sex sex) {
+    public Character(String firstName, String lastName, Sex sex) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.coinPurse = coinPurse;
         this.sex = sex;
+        this.trownOut = false;
     }
     
     public CoinPurse getCoinPurse() {
@@ -39,8 +40,6 @@ public abstract class Character {
     public void setSex(Sex sex) {
         this.sex = sex;
     }
-    
-    
 
     public String getFirstName() {
         return firstName;
@@ -58,46 +57,47 @@ public abstract class Character {
         this.lastName = lastName;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    
+    public String getName() {
+        return firstName + " " + lastName;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public boolean isTrownOut() {
+        return trownOut;
+    }
+
+    public void setTrownOut() {
+        this.trownOut = true;
     }
     
-    public void eat(Order order /* meal instead */) {
-        if (this.orders.contains(order)) {
-            if (order.cooked) {
+    public void consume(Order order /* meal instead */) {
+        if (order.getCharacter() == this) {
+            if (order.isServed()) {
                 System.out.println("I am eating my meal(" 
                         + order.toString() + ") now.");
-                //order.setEaten();
+                order.setConsumed();
             } else {
                 System.out.println("This is not the meal I ordered.");
             }
         }
     }
     
-    public void giveOrder(Order ... orders) {
+    public Order giveOrder(MenuItem ...items) {
+        Order order = new Order(this);
         System.out.println("I would like to order :");
-        for (Order order : orders) {
-            this.orders.add(order);
+        for (MenuItem item : items) {
+            order.addItem(item);
             System.out.println(order.toString());
         }
+        return order;
     }
     
     public void talk(String something) {
         System.out.println(something);
     }
     
-    /*
-    public void drink(Order order) {
-        if (order.instanceof(Drink)) {
-            System.out.println("I am enjoying this " + order.toString() + " drink.");
-            //order.setConsumed;
-        }
-        
-    }*/
-    
-    
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

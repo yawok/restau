@@ -9,21 +9,34 @@ package restau;
  * @author yawobeng
  */
 public class Barman extends Staff {
+
+    public Barman(String firstName, String lastName, Sex sex) {
+        super(firstName, lastName, sex);
+    }
+    
     private CoinPurse cashRegister = new CoinPurse();
+
+    public CoinPurse getCashRegister() {
+        return cashRegister;
+    }
+
+    
+    public void collectCash(float cash) {
+        float cashRegisterBalance = this.getCashRegister().getBalance();
+        float newBalance = cashRegisterBalance + cash;
+        this.cashRegister.setBalance(newBalance);
+    }
+    
     
     public void prepareDrink(Order order) {
-        for (MenuItem item :order.item) {
+        for (MenuItem item : order.getItems()) {
             if (item instanceof Drink){
                 Drink drink = (Drink) item;
                 System.out.println("I am preparing the " + drink + " drink)");
-                drink.setIsPrepared(true);
+                drink.setIsPrepared();
+                this.increasePopularity();
             }
         }
-        if (order.item  ) {
-            System.out.println("I am preparing the drink(" + order + ")");
-            //order.setPrepared;
-            order.pay();
-            
-        }
+        
     }
 }
