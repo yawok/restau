@@ -18,6 +18,16 @@ public enum Sex {
         this.description = description;
     }
     
+    public static String[] describe() {
+        String[] description = {
+            MALE.toString(),
+            FEMALE.toString(),
+            NON_BINARY.toString()
+        };
+        return description;
+    }
+    
+    @Override
     public String toString() {
         return description;
     }

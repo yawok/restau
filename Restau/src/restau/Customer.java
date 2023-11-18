@@ -4,6 +4,8 @@
  */
 package restau;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author yawobeng
@@ -11,11 +13,20 @@ package restau;
 public class Customer extends Character {
     private Table table;
     private boolean isOwing;
+    private static ArrayList<Customer> customers = new ArrayList<Customer>();
 
     public Customer(String firstName, String lastName, Sex sex, Table table) {
         super(firstName, lastName, sex);
         this.table = table;
+        customers.add(this);
     }
+
+    public Customer(String firstName, String lastName, Sex sex) {
+        super(firstName, lastName, sex);
+        customers.add(this);
+    }
+    
+    
 
     public Table getTable() {
         return table;
