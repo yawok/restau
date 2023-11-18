@@ -11,7 +11,7 @@ package restau;
 public class Drink extends MenuItem {
     
     private DrinkType drinkType;
-    public Drink(String title, Integer price, DrinkType drinkType) {
+    public Drink(String title, float price, DrinkType drinkType) {
         super(title, price);
         this.drinkType = drinkType;
     }
@@ -24,9 +24,5 @@ public class Drink extends MenuItem {
         this.drinkType = drinkType;
     }
     
-    @Override 
-    public String toString() {
-        return this.getTitle();
-    }
     
 }

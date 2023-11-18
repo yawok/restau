@@ -1,16 +1,1 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package restau;
-
-import java.util.ArrayList;
-
-/**
- *
- * @author Administrateur
- */
-public class Menu {
-    ArrayList MenuItems = new ArrayList();
-    
-}
+/* * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template */package restau;import java.util.ArrayList;/** * * @author Administrateur */public class Menu {    //private ArrayList<ArrayList<MenuItem>> menuItems = new ArrayList();    private ArrayList<Drink> drinks;    private ArrayList<Meal> meals;        public Menu() {        drinks = new ArrayList<Drink>();        meals = new ArrayList<Meal>();    }        public void addToMenu(MenuItem item) {        if (item instanceof Meal) {            Meal meal = (Meal) item;            meals.add(meal);        } else if (item instanceof Drink) {            Drink drink = (Drink) item;            drinks.add(drink);        }    }    public ArrayList<Drink> getDrinks() {        return drinks;    }    public ArrayList<Meal> getMeals() {        return meals;    }    @Override    public String toString() {        String output = "*** Menu ***\n";        output += ("Meals: \n");        for (Meal meal : meals) {            output += meal.toString() + "\n";        }        output += ("Drinks: \n");        for (Drink drink : drinks) {            output += drink.toString() + "\n";        }        return output;           }    }

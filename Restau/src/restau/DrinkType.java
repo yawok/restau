@@ -9,5 +9,23 @@ package restau;
  * @author yawobeng
  */
 public enum DrinkType {
-    ALCOHOLIC, NON_ALCOHOLIC;
+    ALCOHOLIC("Alcoholic"), NON_ALCOHOLIC("Non-alcoholic");
+    
+    String description;
+    
+    DrinkType(String description) {
+        this.description = description;
+    }
+    
+    public static String[] describe() {
+        String[] description = {ALCOHOLIC.toString(), NON_ALCOHOLIC.toString()};
+        return description;
+    }
+    
+    @Override 
+    public String toString() {
+        return description;
+    }
+    
+    
 }

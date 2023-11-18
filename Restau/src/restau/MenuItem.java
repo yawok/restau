@@ -10,10 +10,10 @@ package restau;
  */
 public abstract class MenuItem {
     private String title;
-    private Integer price;
+    private float price;
     private boolean prepared;
 
-    public MenuItem(String title, Integer price) {
+    public MenuItem(String title, float price) {
         this.title = title;
         this.price = price;
     }
@@ -26,7 +26,7 @@ public abstract class MenuItem {
         this.title = title;
     }
 
-    public Integer getPrice() {
+    public float getPrice() {
         return price;
     }
 
@@ -44,7 +44,7 @@ public abstract class MenuItem {
 
     @Override
     public String toString() {
-        String description = "Title: " + title + "/n Price: " + price;
+        String description = title + " || " + price + "euros";
         return description;
     }
     

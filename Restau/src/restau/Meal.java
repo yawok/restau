@@ -12,7 +12,7 @@ public class Meal extends MenuItem {
     
     private MealType mealType;
 
-    public Meal(String title, Integer price, MealType mealType) {
+    public Meal(String title, float price, MealType mealType) {
         super(title, price);
         this.mealType = mealType;
     }
@@ -23,11 +23,6 @@ public class Meal extends MenuItem {
 
     public void setMealType(MealType mealType) {
         this.mealType = mealType;
-    }
-    
-    @Override 
-    public String toString() {
-        return this.getTitle();
     }
     
 }
