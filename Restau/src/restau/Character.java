@@ -23,6 +23,7 @@ public abstract class Character {
         this.lastName = lastName;
         this.sex = sex;
         this.trownOut = false;
+        this.getCoinPurse().setBalance(25);
     }
     
     public CoinPurse getCoinPurse() {

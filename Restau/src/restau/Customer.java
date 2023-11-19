@@ -25,8 +25,10 @@ public class Customer extends Character {
         super(firstName, lastName, sex);
         customers.add(this);
     }
-    
-    
+
+    public static ArrayList<Customer> getCustomers() {
+        return customers;
+    }
 
     public Table getTable() {
         return table;

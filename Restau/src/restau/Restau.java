@@ -1,223 +1,1 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
-package restau;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-/**
- *
- * @author yawobeng
- */
-public class Restau {
-
-    /**
-     * @param args the command line arguments
-     */
-    
-    private static final Scanner scanner = new Scanner(System.in);
-    
-    
-    
-    
-    public static void main(String[] args) {
-        displayWelcomeMessage();
-        String[] options = {"Menu portal", "Create character", "Quit"};
-        boolean isRunning = true;
-        int choice;
-        
-        while(isRunning) {
-            displayOptions(options, "");
-            choice = getUserChoice();
-            switch (choice) {
-                case 1 -> {
-                    menuPortal();
-                }
-                case 2 -> {
-                    characterPortal();
-                }
-                case 99 -> {
-                    System.out.println("Thanks for visiting Restau!");
-                    isRunning = false;
-                }
-            default -> System.out.println("Wrong input. Try again");
-            }
-        }
-        
-        
-    }
-    
-    private static void displayWelcomeMessage() {
-        System.out.println("********************************");
-        System.out.println("* Welcome to the Restau Portal *");
-        System.out.println("********************************");
-    }
-    
-    private static void displayOptions (String[] options, String request){
-        System.out.println("\n" + request + " options");
-        for (int i = 0; i < options.length; i++) {
-            if (options[i] == "Quit" || options[i] == "Cancel") {
-                System.out.println(99 + ". " + options[i]);
-            } else {
-                System.out.println((i + 1) + ". " + options[i]);
-            }
-        }
-    }
-    
- 
-    private static int getUserChoice() {
-        System.out.println("Enter a choice: ");
-        while(!scanner.hasNextInt()) {
-            System.out.println("Invalid input. Enter a number");
-            scanner.next();
-        }
-        int input = scanner.nextInt();
-        scanner.nextLine();
-        return input;
-    }
-   
-    private static String getStringFromUser(String request) {
-        System.out.println("Enter a " + request + ": ");
-        return scanner.nextLine();
-    }
-    
-    private static int getIntFromUser(String request) {
-        System.out.println("Enter a " + request + ": ");
-        return scanner.nextInt();
-    }
-    
-    private static float getFloatFromUser(String request) {
-        System.out.println("Enter a " + request + ": ");
-        while(!scanner.hasNextFloat()) {
-            System.out.println("Invalid input. Enter a valid price");
-            scanner.next();
-        }
-        return scanner.nextFloat();
-    }
-    
-    
-    private static void menuPortal() {
-        String[] options = {"Create Meal", "Create Drink", "Show Menu", "Quit"};
-        
-        
-        String title;
-        float price;
-        int choice;
-        boolean running = true;
-        int menuChoice;
-        while(running) {
-            displayOptions(options, "");
-            menuChoice = getUserChoice();
-            switch(menuChoice) {
-                case 1 -> {
-                    title = getStringFromUser("Title");
-                    price = getFloatFromUser("Price");
-
-                    displayOptions(MealType.describe(), "Meal type");
-                    choice = getUserChoice();
-
-                    Meal meal1 = MenuPortal.createMeal(title, price, choice);
-                }
-                case 2 -> { 
-                    title = getStringFromUser("Title");
-                    price = getFloatFromUser("Price");
-                    displayOptions(DrinkType.describe(), "Drink type");
-                    choice = getUserChoice();
-
-                    Drink drink = MenuPortal.createDrink(title, price, choice);
-                }
-                case 3 -> System.out.println(MenuPortal.getMenu());
-                case 99 -> {
-                    System.out.println("Come back soon!");
-                    running = false;
-                }
-                default -> System.out.println("Wrong input. Choose a number");
-
-            }
-        }
-    }
-    
-    private static void characterPortal() {
-        String[] options = {"Create Customer", "Create Staff"};
-        
-        String firstname, lastname;
-        Sex sex = Sex.NON_BINARY;
-        boolean isRunning = true;
-        boolean invalidSex = true;
-        int menuChoice;
-        while (isRunning) {
-            firstname = getStringFromUser("first name");
-            lastname = getStringFromUser("last name");
-
-            displayOptions(Sex.describe(), "Sex");
-            menuChoice = getUserChoice();
-            while (invalidSex) {
-                switch (menuChoice) {
-                    case 1 -> {
-                        sex = Sex.FEMALE;
-                        invalidSex = false;
-                    }
-                    case 2 -> {
-                        sex = Sex.MALE;
-                        invalidSex = false;
-                    }
-                    case 3 -> {
-                        sex = Sex.NON_BINARY;
-                        invalidSex = false;
-                    }
-                    default -> System.out.println("Choose a valid number");
-                }
-            }
-            
-            displayOptions(options, "");
-            menuChoice = getUserChoice();
-            
-            switch (menuChoice) {
-                case 1 -> {
-                    
-                    Customer customer = new Customer(firstname, lastname, sex);
-                    System.out.println("Created customer: " + customer.getName());
-                }
-                case 2 -> {
-                    String[] staff_options = {"Restaurant Owner", 
-                      "Chef", "Barman", "Cook", "Waiter",  "Cancel"
-                    };
-                    displayOptions(staff_options, "Staff options");
-                    menuChoice = getUserChoice();
-                    switch (menuChoice) {
-                        case 1 -> { 
-                            RestaurantOwner owner = new RestaurantOwner(firstname, lastname, sex);
-                            System.out.println("Created restaurant owner: " + owner.getName());
-                    }
-                        case 2 -> { 
-                            Chef chef = new Chef(firstname, lastname, sex);
-                            System.out.println("Created chef: " + chef.getName());
-                    }
-                        case 3 -> { 
-                            Barman barman = new Barman(firstname, lastname, sex);
-                            System.out.println("Created barman: " + barman.getName());
-                    }
-                        case 4 -> { 
-                            Cook cook = new Cook(firstname, lastname, sex);
-                            System.out.println("Created cook: " + cook.getName());
-                    }
-                        case 5 -> {
-                            Waiter waiter = new Waiter(firstname, lastname, sex);
-                            System.out.println("Created waiter: " + waiter.getName());
-                    }
-                        case 99 -> {
-                            return;
-                    }
-                        default -> System.out.println("Wrong choice. Try again.");
-                    }  
-                }
-                default -> System.out.println("You entered a wrong input. Try again");
-                        
-            }
-            
-            
-        }
-        
-    }
-}
+/* * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template */package restau;import java.util.ArrayList;import java.util.Scanner;/** * * @author yawobeng */public class Restau {    /**     * @param args the command line arguments     */        private static final Scanner scanner = new Scanner(System.in);    private static Barman barman = new Barman("Barman", "1", Sex.MALE);                public static void main(String[] args) {        displayWelcomeMessage();        String[] options = {"Menu portal", "Create character", "Be a customer", "Quit"};        boolean isRunning = true;        int choice;                while(isRunning) {            displayOptions(options, "");            choice = getUserChoice();            switch (choice) {                case 1 -> {                    menuPortal();                }                case 2 -> {                    characterPortal();                }                case 3 -> {                    beCustomer();                }                case 99 -> {                    System.out.println("Thanks for visiting Restau!");                    isRunning = false;                }            default -> System.out.println("Wrong input. Try again");            }        }                    }        private static void displayWelcomeMessage() {        System.out.println("********************************");        System.out.println("* Welcome to the Restau Portal *");        System.out.println("********************************");    }        private static void displayOptions (String[] options, String request){        if (options.length > 0){            System.out.println("\n" + request + " options");            for (int i = 0; i < options.length; i++) {                if (options[i] == "Quit" || options[i] == "Cancel") {                    System.out.println(99 + ". " + options[i]);                } else {                    System.out.println((i + 1) + ". " + options[i]);                }            }        } else {            System.out.println("There are no options to display");            System.out.println("99. Cancel");            return;        }    }         private static int getUserChoice() {        System.out.println("Enter a choice: ");        while(!scanner.hasNextInt()) {            System.out.println("Invalid input. Enter a number");            scanner.next();        }        int input = scanner.nextInt();        scanner.nextLine();        return input;    }       private static String getStringFromUser(String request) {        System.out.println("Enter a " + request + ": ");        return scanner.nextLine();    }        private static int getIntFromUser(String request) {        System.out.println("Enter a " + request + ": ");        return scanner.nextInt();    }        private static float getFloatFromUser(String request) {        System.out.println("Enter a " + request + ": ");        while(!scanner.hasNextFloat()) {            System.out.println("Invalid input. Enter a valid price");            scanner.next();        }        return scanner.nextFloat();    }            private static void menuPortal() {        String[] options = {"Create Meal", "Create Drink", "Show Menu", "Load saved", "Quit"};                        String title;        float price;        int choice;        boolean running = true;        int menuChoice;        while(running) {            displayOptions(options, "");            menuChoice = getUserChoice();            switch(menuChoice) {                case 1 -> {                    title = getStringFromUser("Title");                    price = getFloatFromUser("Price");                    displayOptions(MealType.describe(), "Meal type");                    choice = getUserChoice();                    Meal meal1 = MenuPortal.createMeal(title, price, choice, true);                }                case 2 -> {                     title = getStringFromUser("Title");                    price = getFloatFromUser("Price");                    displayOptions(DrinkType.describe(), "Drink type");                    choice = getUserChoice();                    Drink drink = MenuPortal.createDrink(title, price, choice, true);                }                case 3 -> System.out.println(MenuPortal.getMenu());                case 4 -> MenuPortal.loadFromFile();                case 99 -> {                    System.out.println("Come back soon!");                    running = false;                }                default -> System.out.println("Wrong input. Choose a number");            }        }    }        private static void characterPortal() {        String[] options = {"Create Customer", "Create Staff"};                String firstname, lastname;        Sex sex = Sex.NON_BINARY;        boolean isRunning = true;        boolean invalidSex = true;        int menuChoice;        while (isRunning) {            firstname = getStringFromUser("first name");            lastname = getStringFromUser("last name");            displayOptions(Sex.describe(), "Sex");            menuChoice = getUserChoice();            while (invalidSex) {                switch (menuChoice) {                    case 1 -> {                        sex = Sex.FEMALE;                        invalidSex = false;                    }                    case 2 -> {                        sex = Sex.MALE;                        invalidSex = false;                    }                    case 3 -> {                        sex = Sex.NON_BINARY;                        invalidSex = false;                    }                    default -> System.out.println("Choose a valid number");                }            }                        displayOptions(options, "");            menuChoice = getUserChoice();                        switch (menuChoice) {                case 1 -> {                                        Customer customer = new Customer(firstname, lastname, sex);                    System.out.println("Created customer: " + customer.getName());                    isRunning = false;                }                case 2 -> {                    String[] staff_options = {"Restaurant Owner",                       "Chef", "Barman", "Cook", "Waiter",  "Cancel"                    };                    displayOptions(staff_options, "Staff options");                    menuChoice = getUserChoice();                    switch (menuChoice) {                        case 1 -> {                             RestaurantOwner owner = new RestaurantOwner(firstname, lastname, sex);                            System.out.println("Created restaurant owner: " + owner.getName());                            isRunning = false;                    }                        case 2 -> {                             Chef chef = new Chef(firstname, lastname, sex);                            System.out.println("Created chef: " + chef.getName());                            isRunning = false;                    }                        case 3 -> {                             Barman barman = new Barman(firstname, lastname, sex);                            System.out.println("Created barman: " + barman.getName());                            isRunning = false;                    }                        case 4 -> {                             Cook cook = new Cook(firstname, lastname, sex);                            System.out.println("Created cook: " + cook.getName());                            isRunning = false;                    }                        case 5 -> {                            Waiter waiter = new Waiter(firstname, lastname, sex);                            System.out.println("Created waiter: " + waiter.getName());                            isRunning = false;                    }                        case 99 -> {                            return;                    }                        default -> System.out.println("Wrong choice. Try again.");                    }                  }                default -> System.out.println("You entered a wrong input. Try again");                                    }                                }            }        private static void beCustomer() {                        String[] actions = {"Order", "Eat", "Pay", "Cancel"};        ArrayList<Customer> allCustomers = Customer.getCustomers();        ArrayList<String> customerList = new ArrayList();        for (Customer customer : allCustomers) {            customerList.add(customer.getName());        }        Customer customer = null;        boolean isRunning = true;        int choice;                while (isRunning) {            displayOptions(customerList.toArray(new String[0]), "Customers");            choice = getUserChoice();            try {                customer = Customer.getCustomers().get(choice - 1);                System.out.println("Selected: " + customer.getName());                isRunning = false;            } catch (IndexOutOfBoundsException e) {                if (choice == 99) return;                System.out.println("Wrong input.");            }        }                isRunning = true;        while(isRunning) {            displayOptions(actions, "Possible actions");            choice = getUserChoice();                        MenuItem item;            switch(choice) {                case 1 -> {                    boolean itemChoiceLoop = true;                    Order order = new Order(customer);                    ArrayList<MenuItem> menu = Menu.getMenu();                                        while(itemChoiceLoop){                        System.out.println(Menu.showMenu() + "99. Finish selection");                        choice = getUserChoice();                        switch(choice) {                            case 99 -> {                                System.out.println("Okay. All items added to order");                                System.out.println("The total is: " + order.getTotal() + "euros");                                itemChoiceLoop = false;                                break;                            }                            default -> {                            try {                                item = menu.get(choice - 1);                                System.out.println("Selected: " + item.getTitle());                                order.addItem(item);                                System.out.println("Item added to order");                            } catch(IndexOutOfBoundsException e) {                                System.out.println("Wrong input.");                                }                            }                        }                    }                }                case 2 -> {                    System.out.println("This feature will be added later");                }                case 3 -> {                    ArrayList<Order> allOrders = Order.getOrders();                    System.out.println(allOrders.size());                    ArrayList<Order> myOrders = new ArrayList<>();                    ArrayList<String> myOrdersOptions = new ArrayList();                    Order selectedOrder = null;                    // filter orders                    for (Order order : allOrders) {                        System.out.println(order.getCharacter());                        System.out.println(customer);                        if (order.getCharacter().equals(customer)){                            myOrders.add(order);                            myOrdersOptions.add(order.toString());                        }                    }                                                            // order selection                    while(true){                        displayOptions(myOrdersOptions.toArray(new String[0]), "Order");                        choice = getUserChoice();                        try {                            selectedOrder = myOrders.get(choice - 1);                            System.out.println("Order selected: " + selectedOrder.toString());                            break;                        } catch (IndexOutOfBoundsException e) {                            if (choice == 99 ){                                break;                            }                            System.out.println("Wrong input.");                        }                    }                                                            System.out.println("You will be paying: " + selectedOrder.getTotal());                    selectedOrder.pay(barman);                    System.out.println("Your balance is now: " + customer.getCoinPurse().getBalance());                }                case 99 -> {                    System.out.println("Okay.");                    isRunning = false;                    break;                }                default -> {System.out.println("Wrong input");}            }        }            }    }

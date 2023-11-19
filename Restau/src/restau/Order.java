@@ -15,6 +15,7 @@ public class Order {
     private boolean consumed;
     private Character character;
     private ArrayList<MenuItem> items;
+    private static ArrayList<Order> orders = new ArrayList<Order>();
     
     
     public Order(boolean cooked, boolean isServed, boolean isPaid, Character character){
@@ -27,6 +28,7 @@ public class Order {
                 this.paid=isPaid;
                 this.character = character;
                 items = new ArrayList<MenuItem>();
+                orders.add(this);
             }
         } catch(Exception e) {
             System.out.println(e.getMessage());
@@ -44,6 +46,7 @@ public class Order {
                 this.consumed = false;
                 this.character = character;
                 this.items = new ArrayList<MenuItem>();
+                orders.add(this);
             }
         } catch(Exception e) {
             System.out.println(e.getMessage());
@@ -51,6 +54,11 @@ public class Order {
         
     }
 
+    public static ArrayList<Order> getOrders() {
+        return orders;
+    }
+    
+    
     public boolean isServed() {
         return served;
     }
@@ -69,6 +77,7 @@ public class Order {
 
     public float getTotal() {
         Float total = 0f;
+        System.out.println("length " + items.size());
         for (MenuItem item : items){
             total += item.getPrice();
         }
