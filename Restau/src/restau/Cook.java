@@ -8,7 +8,7 @@ package restau;
  *
  * @author yawobeng
  */
-public class Cook extends Staff{
+public final class Cook extends Staff{
 
     public Cook(String firstName, String lastName, Sex sex) {
         super(firstName, lastName, sex);

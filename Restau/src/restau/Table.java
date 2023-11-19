@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author Administrateur
  */
-public class Table {
+public final class Table {
     //ArrayList<Characters> customers = new ArrayList<Characters>();
     
     protected int chairs;

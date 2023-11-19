@@ -8,7 +8,7 @@ package restau;
  *
  * @author yawobeng
  */
-public class Waiter extends Staff{
+public final class Waiter extends Staff{
     
     
     public Waiter(String firstName, String lastName, Sex sex) {

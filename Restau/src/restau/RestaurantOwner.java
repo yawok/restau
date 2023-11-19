@@ -8,7 +8,7 @@ package restau;
  *
  * @author yawobeng
  */
-public class RestaurantOwner extends Staff implements IsManager {
+public final class RestaurantOwner extends Staff implements IsManager {
 
     public RestaurantOwner(String firstName, String lastName, Sex sex) {
         super(firstName, lastName, sex);

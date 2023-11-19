@@ -8,7 +8,7 @@ package restau;
  *
  * @author yawobeng
  */
-public class Barman extends Staff {
+public final class Barman extends Staff {
 
     public Barman(String firstName, String lastName, Sex sex) {
         super(firstName, lastName, sex);

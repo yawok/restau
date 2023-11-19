@@ -8,7 +8,7 @@ package restau;
  *
  * @author yawobeng
  */
-public class Chef extends Staff implements IsManager{
+public final class Chef extends Staff implements IsManager{
     
     public Chef(String firstName, String lastName, Sex sex) {
         super(firstName, lastName, sex);

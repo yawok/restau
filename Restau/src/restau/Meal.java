@@ -8,7 +8,7 @@ package restau;
  *
  * @author yawobeng
  */
-public class Meal extends MenuItem {
+public final class Meal extends MenuItem {
     
     private MealType mealType;
 

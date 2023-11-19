@@ -8,7 +8,7 @@ package restau;
  *
  * @author yawobeng
  */
-public class Drink extends MenuItem {
+public final class Drink extends MenuItem {
     
     private DrinkType drinkType;
     public Drink(String title, float price, DrinkType drinkType) {
